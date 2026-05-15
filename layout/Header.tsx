@@ -27,7 +27,7 @@ const Header = () => {
           <Image 
             src="/Img/logo.webp" 
             alt="Everace Logo" 
-            width={140} 
+            width={140}
             height={35} 
             priority
           />
@@ -46,7 +46,7 @@ const Header = () => {
 
         {/* Action Buttons (Palm Tree Style) */}
         <div className="flex items-center gap-3">
-          <div className="hidden xl:flex items-center gap-2 text-xs font-semibold text-gray-500 mr-2 border-r pr-4">
+          <div className="hidden xl:flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-500 mr-2 border-r pr-4">
             <Phone size={14} className="text-yellow-500" /> <span>+91 1111111111</span>
           </div>
           <button className="flex items-center gap-2 border-2 border-gray-100 px-4 py-2 rounded-full text-xs font-bold hover:bg-gray-50 transition">
