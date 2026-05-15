@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, PanInfo } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
@@ -12,7 +12,7 @@ const products = [
     price: "21.00",
     oldPrice: "24.00",
     discount: "-12%",
-    image: "/Img/walnuts.jpg", // Replace with your asset
+    image: "/Img/walnuts.jpg",
     rating: 4,
   },
   {
@@ -39,109 +39,229 @@ const products = [
     image: "/Img/blueberry.jpg",
     rating: 3,
   },
+  {
+    id: 5,
+    name: "Organic Cashews",
+    price: "28.00",
+    oldPrice: "32.00",
+    discount: "-15%",
+    image: "/Img/almonds.jpg",
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: "Dried Saffron Berries",
+    price: "52.00",
+    status: "New",
+    image: "/Img/honey.jpeg",
+    rating: 4.8,
+  },
+  {
+    id: 7,
+    name: "Pistachio Kernels",
+    price: "31.00",
+    image: "/Img/walnuts.jpg",
+    rating: 4.2,
+  },
+  {
+    id: 8,
+    name: "Pure Acacia Honey",
+    price: "18.00",
+    status: "New",
+    image: "/Img/honey.jpeg",
+    rating: 4.5,
+  },
 ];
 
 const ProductSec = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      let newItemsPerPage = 4;
+      if (window.innerWidth < 640) {
+        newItemsPerPage = 1;
+      } else if (window.innerWidth < 1024) {
+        newItemsPerPage = 2;
+      }
+      setItemsPerPage(newItemsPerPage);
+      // Reset index to prevent out-of-bounds errors on resize
+      setCurrentIndex(0);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleDragEnd = (event: any, info: PanInfo) => {
+    const threshold = 50;
+    if (info.offset.x < -threshold) {
+      nextSlide();
+    } else if (info.offset.x > threshold) {
+      prevSlide();
+    }
+  };
+
   return (
-    <section className="py-16 px-8 bg-[#fdfbf9]">
+    <section className="py-24 px-4 sm:px-8 bg-[#fdfbf9] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="flex justify-between items-end mb-10">
-          <div>
-            <h2 className="text-4xl font-black tracking-tighter text-gray-900">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left gap-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-gray-900 uppercase">
               Bestseller
             </h2>
-            <p className="text-gray-500 mt-2 max-w-md text-sm md:text-lg leading-relaxed">
+            <p className="text-gray-500 mt-4 max-w-md text-sm md:text-lg leading-relaxed font-medium">
               Premium quality dry fruits and preserves sourced directly from the
               valleys of Kashmir.
             </p>
-          </div>
-          <div className="flex gap-2">
-            <button className="p-3 border rounded-full hover:bg-black hover:text-white transition-colors">
-              <ChevronLeft size={20} />
+          </motion.div>
+          <div className="flex gap-3">
+            <button
+              onClick={prevSlide}
+              className="p-3 sm:p-4 border-2 border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-sm"
+            >
+              <ChevronLeft size={24} />
             </button>
-            <button className="p-3 border rounded-full hover:bg-black hover:text-white transition-colors border-black">
-              <ChevronRight size={20} />
+            <button
+              onClick={nextSlide}
+              className="p-3 sm:p-4 border-2 border-black bg-black text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-md"
+            >
+              <ChevronRight size={24} />
             </button>
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <motion.div
-              key={product.id}
-              whileHover={{ y: -5 }}
-              className="group bg-white rounded-2xl p-4 flex flex-col items-center text-center shadow-sm border border-transparent hover:border-gray-100 transition-all"
-            >
-              {/* Image Container */}
-              <div className="relative w-full aspect-square bg-[#f9f9f9] rounded-xl overflow-hidden mb-6 flex items-center justify-center">
-                {product.discount || product.status ? (
-                  <span className="absolute top-3 left-3 bg-[#facc15] text-[12px] font-medium px-2 py-1 rounded uppercase z-10">
-                    {product.discount || product.status}
-                  </span>
-                ) : null}
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+        {/* Product Carousel Container */}
+        <div className="relative cursor-grab active:cursor-grabbing overflow-hidden">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            onDragEnd={handleDragEnd}
+            animate={{ x: `-${currentIndex * 100}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="flex touch-pan-y"
+          >
+            {/* Pages of Products */}
+            {[...Array(totalPages)].map((_, pageIndex) => (
+              <div
+                key={pageIndex}
+                className={`min-w-full grid gap-6 sm:gap-8 px-2 ${
+                  itemsPerPage === 1
+                    ? "grid-cols-1"
+                    : itemsPerPage === 2
+                      ? "grid-cols-2"
+                      : "grid-cols-4"
+                }`}
+              >
+                {products
+                  .slice(
+                    pageIndex * itemsPerPage,
+                    (pageIndex + 1) * itemsPerPage,
+                  )
+                  .map((product) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      className="group bg-white rounded-4xl p-5 sm:p-6 flex flex-col items-center text-center shadow-sm hover:shadow-2xl border border-gray-100/50 hover:border-transparent transition-all duration-500 select-none"
+                    >
+                      {/* Image Container */}
+                      <div className="relative w-full aspect-square bg-[#f9f9f9] rounded-3xl overflow-hidden mb-6 sm:mb-8 flex items-center justify-center">
+                        {product.discount || product.status ? (
+                          <span className="absolute top-4 left-4 bg-[#facc15] text-[10px] sm:text-[11px] font-black px-3 py-1.5 rounded-full uppercase z-10 shadow-lg">
+                            {product.discount || product.status}
+                          </span>
+                        ) : null}
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out pointer-events-none"
+                        />
+                      </div>
+
+                      {/* Price & Rating */}
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-tighter">
+                          From
+                        </span>
+                        <span className="text-lg sm:text-xl font-black text-gray-900">
+                          ${product.price}
+                        </span>
+                        {product.oldPrice && (
+                          <span className="text-xs sm:text-sm text-gray-400 line-through font-bold">
+                            ${product.oldPrice}
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="text-base sm:text-lg font-black text-gray-800 mt-2 mb-3 h-10 sm:h-12 line-clamp-2 px-2 leading-tight uppercase tracking-tight">
+                        {product.name}
+                      </h3>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1.5 mb-6 sm:mb-8">
+                        {[...Array(5)].map((_, i) => {
+                          const ratingValue = i + 1;
+                          return (
+                            <span key={i}>
+                              {product.rating >= ratingValue ? (
+                                <FaStar className="text-[#facc15] text-[12px] sm:text-[13px]" />
+                              ) : product.rating >= ratingValue - 0.5 ? (
+                                <FaStarHalfAlt className="text-[#facc15] text-[12px] sm:text-[13px]" />
+                              ) : (
+                                <FaRegStar className="text-gray-200 text-[12px] sm:text-[13px]" />
+                              )}
+                            </span>
+                          );
+                        })}
+                        <span className="text-[10px] sm:text-[11px] font-black text-gray-400 ml-2">
+                          {product.rating}
+                        </span>
+                      </div>
+
+                      {/* Action Button (Pill Style) */}
+                      <button className="w-full py-3 sm:py-4 border-2 border-gray-900 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg">
+                        Choose options
+                      </button>
+                    </motion.div>
+                  ))}
               </div>
-
-              {/* Price & Rating */}
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-sm md:text-lg font-bold text-gray-400">
-                  From
-                </span>
-                <span className="text-sm md:text-lg font-black text-gray-900">
-                  ${product.price}
-                </span>
-                {product.oldPrice && (
-                  <span className="text-sm md:text-lg text-gray-400 line-through">
-                    ${product.oldPrice}
-                  </span>
-                )}
-              </div>
-
-              <h3 className="text-sm md:text-lg font-bold text-gray-800 mt-4 mb-2 h-10 line-clamp-2 px-2 leading-tight">
-                {product.name}
-              </h3>
-
-              {/* Rating */}
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => {
-                  const ratingValue = i + 1;
-                  return (
-                    <span key={i}>
-                      {product.rating >= ratingValue ? (
-                        <FaStar className="text-[#facc15] text-xs" />
-                      ) : product.rating >= ratingValue - 0.5 ? (
-                        <FaStarHalfAlt className="text-[#facc15] text-xs" />
-                      ) : (
-                        <FaRegStar className="text-gray-300 text-xs" />
-                      )}
-                    </span>
-                  );
-                })}
-                <span className="text-[10px] font-bold text-gray-400 ml-1">
-                  ({product.rating})
-                </span>
-              </div>
-
-              {/* Action Button (Pill Style) */}
-              <button className="w-full py-3 border-2 border-gray-900 rounded-full text-xs font-black uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all">
-                Choose options
-              </button>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
         </div>
 
         {/* Carousel Indicator */}
-        <div className="flex justify-center gap-2 mt-12">
-          <div className="h-1.5 w-8 bg-gray-900 rounded-full" />
-          <div className="h-1.5 w-1.5 bg-gray-300 rounded-full" />
-          <div className="h-1.5 w-1.5 bg-gray-300 rounded-full" />
+        <div className="flex justify-center gap-3 mt-12 sm:mt-16">
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-2 rounded-full transition-all duration-500 ${
+                currentIndex === i
+                  ? "w-8 sm:w-12 bg-black"
+                  : "w-2 bg-gray-200 hover:bg-gray-400"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

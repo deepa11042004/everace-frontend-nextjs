@@ -8,8 +8,11 @@ import {
   FaLinkedinIn,
   FaYoutube,
   FaStar,
+  FaSignOutAlt
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 const navItems = [
   {
@@ -91,6 +94,7 @@ const navItems = [
 
 const Header = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { user, logout, isAuthenticated } = useAuth();
 
   return (
     <header className="w-full font-sans absolute top-0 left-0 z-50 bg-white/90 backdrop-blur-md border-b border-white/20">
@@ -109,7 +113,7 @@ const Header = () => {
       {/* Main Navigation Row */}
       <div className="py-4 px-8 flex justify-between items-center border-b border-gray-100">
         {/* Logo (Everace Branding) */}
-        <div className="cursor-pointer">
+        <Link href="/" className="cursor-pointer">
           <Image
             src="/Img/logo.webp"
             alt="Everace Logo"
@@ -117,7 +121,7 @@ const Header = () => {
             height={35}
             priority
           />
-        </div>
+        </Link>
 
         {/* Links with Subtabs */}
         <nav className="hidden lg:flex items-center gap-8 text-[13px] font-bold text-gray-800 uppercase tracking-tight relative">
@@ -205,15 +209,31 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Action Buttons */}
         <div className="flex items-center gap-3">
           <div className="hidden xl:flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-500 mr-2 border-r pr-4">
             <Phone size={14} className="text-yellow-500" />{" "}
             <span>+91 1111111111</span>
           </div>
-          <button className="flex items-center gap-2 border-2 border-gray-100 px-4 py-2 rounded-full text-xs font-bold hover:bg-gray-50 transition">
-            <User size={16} /> ACCOUNT
-          </button>
+          
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 border-2 border-yellow-100 px-4 py-2 rounded-full text-xs font-bold bg-yellow-50/50">
+                <User size={16} className="text-yellow-600" /> 
+                <span className="uppercase">{user?.firstName}</span>
+              </div>
+              <button 
+                onClick={logout}
+                className="p-2.5 bg-gray-100 rounded-full hover:bg-red-50 hover:text-red-600 transition-all group"
+                title="Logout"
+              >
+                <FaSignOutAlt size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" className="flex items-center gap-2 border-2 border-gray-100 px-4 py-2 rounded-full text-xs font-bold hover:bg-gray-50 transition">
+              <User size={16} /> ACCOUNT
+            </Link>
+          )}
           <button className="flex items-center gap-2 bg-[#facc15] px-4 py-2 rounded-full text-xs font-black shadow-md hover:bg-black hover:text-white transition-all duration-300">
             <ShoppingBasket size={16} /> RS. 0.00 (0)
           </button>
