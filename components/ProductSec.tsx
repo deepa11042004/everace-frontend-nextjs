@@ -151,7 +151,7 @@ const ProductSec = () => {
         </div>
 
         {/* Product Carousel Container */}
-        <div className="relative cursor-grab active:cursor-grabbing overflow-hidden">
+        <div className="relative cursor-grab active:cursor-grabbing overflow-hidden py-2">
           <motion.div
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
@@ -182,7 +182,7 @@ const ProductSec = () => {
                       key={product.id}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      className="group bg-white rounded-4xl p-5 sm:p-6 flex flex-col items-center text-center shadow-sm hover:shadow-2xl border border-gray-100/50 hover:border-transparent transition-all duration-500 select-none"
+                      className="group bg-white rounded-4xl p-5 sm:p-6 flex flex-col items-center text-center shadow-sm border border-gray-100 hover:border-transparent transition-all duration-500 select-none"
                     >
                       {/* Image Container */}
                       <div className="relative w-full aspect-square bg-[#f9f9f9] rounded-3xl overflow-hidden mb-6 sm:mb-8 flex items-center justify-center">
