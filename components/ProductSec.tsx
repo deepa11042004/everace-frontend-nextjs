@@ -119,16 +119,17 @@ const ProductSec = () => {
     <section className="py-24 px-4 sm:px-8 bg-[#fdfbf9] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 text-center md:text-left gap-6">
+        <div className="flex flex-col items-center mb-16 text-center gap-6">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="flex flex-col items-center"
           >
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-gray-900 uppercase">
               Bestseller
             </h2>
-            <p className="text-gray-500 mt-4 max-w-md text-sm md:text-lg leading-relaxed font-medium">
+            <p className="text-gray-500 mt-4 max-w-2xl text-sm md:text-lg leading-relaxed font-medium">
               Premium quality dry fruits and preserves sourced directly from the
               valleys of Kashmir.
             </p>
