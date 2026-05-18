@@ -2,77 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { motion, PanInfo } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useCart } from "@/context/CartContext";
+import { mockProducts } from "@/lib/mockProducts";
 
-const products = [
-  {
-    id: 1,
-    name: "Kashmiri Walnuts",
-    price: "21.00",
-    oldPrice: "24.00",
-    discount: "-12%",
-    image: "/Img/walnuts.jpg",
-    rating: 4,
-  },
-  {
-    id: 2,
-    name: "Kashmiri Dry Honey",
-    price: "36.00",
-    status: "New",
-    image: "/Img/honey.jpeg",
-    rating: 3,
-  },
-  {
-    id: 3,
-    name: "Kashmiri Almond",
-    price: "44.00",
-    status: "New",
-    image: "/Img/almonds.jpg",
-    rating: 4.5,
-  },
-  {
-    id: 4,
-    name: "Kashmiri Blueberry",
-    price: "36.00",
-    status: "New",
-    image: "/Img/blueberry.jpg",
-    rating: 3,
-  },
-  {
-    id: 5,
-    name: "Organic Cashews",
-    price: "28.00",
-    oldPrice: "32.00",
-    discount: "-15%",
-    image: "/Img/almonds.jpg",
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: "Dried Saffron Berries",
-    price: "52.00",
-    status: "New",
-    image: "/Img/honey.jpeg",
-    rating: 4.8,
-  },
-  {
-    id: 7,
-    name: "Pistachio Kernels",
-    price: "31.00",
-    image: "/Img/walnuts.jpg",
-    rating: 4.2,
-  },
-  {
-    id: 8,
-    name: "Pure Acacia Honey",
-    price: "18.00",
-    status: "New",
-    image: "/Img/honey.jpeg",
-    rating: 4.5,
-  },
-];
+const productIds = [3, 9, 5, 6, 10, 11, 12, 13];
+const products = productIds.map((id) => mockProducts.find((p) => p.id === id)!).filter(Boolean);
 
 const ProductSec = () => {
   const { addToCart } = useCart();
@@ -193,12 +130,14 @@ const ProductSec = () => {
                             {product.discount || product.status}
                           </span>
                         ) : null}
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out pointer-events-none"
-                        />
+                        <Link href={`/product/${product.id}`} className="relative w-full h-full block">
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out pointer-events-none"
+                          />
+                        </Link>
                       </div>
 
                       {/* Price & Rating */}
@@ -216,9 +155,9 @@ const ProductSec = () => {
                         )}
                       </div>
 
-                      <h3 className="text-base sm:text-lg font-black text-gray-800 mt-2 mb-3 h-10 sm:h-12 line-clamp-2 px-2 leading-tight uppercase tracking-tight">
+                      <Link href={`/product/${product.id}`} className="text-base sm:text-lg font-black text-gray-800 hover:text-yellow-600 transition-colors mt-2 mb-3 h-10 sm:h-12 line-clamp-2 px-2 leading-tight uppercase tracking-tight block">
                         {product.name}
-                      </h3>
+                      </Link>
 
                       {/* Rating */}
                       <div className="flex items-center gap-1.5 mb-6 sm:mb-8">
