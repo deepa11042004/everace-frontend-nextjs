@@ -2,7 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock} from "lucide-react";
+import Link from "next/link";
 
 const HeroSec = () => {
   return (
@@ -44,7 +45,7 @@ const HeroSec = () => {
             </span>
           </div>
 
-          <h1 className="text-7xl font-black mb-6 leading-[0.9] tracking-tighter drop-shadow-2xl">
+          <h1 className="text-7xl font-black mb-6 drop-shadow-2xl">
             ADVENTURE <br />
             <span className="text-[#facc15]">AWAITS</span> YOU.
           </h1>
@@ -54,7 +55,7 @@ const HeroSec = () => {
             Designed for those who never stop exploring.
           </p>
 
-          <div className="flex justify-center gap-4">
+          <Link href="/shop" className="flex justify-center gap-4">
             <button className="bg-[#facc15] text-black px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-white transition-colors shadow-2xl group">
               Shop Now
               <ArrowRight
@@ -62,18 +63,8 @@ const HeroSec = () => {
                 className="group-hover:translate-x-1 transition-transform"
               />
             </button>
-          </div>
+          </Link>
         </motion.div>
-      </div>
-
-      {/* Carousel Dots (Style from second image) */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {[1, 2, 3, 4].map((dot, i) => (
-          <div
-            key={i}
-            className={`h-2 rounded-full transition-all ${i === 0 ? "w-8 bg-[#facc15]" : "w-2 bg-white/50"}`}
-          />
-        ))}
       </div>
     </section>
   );
