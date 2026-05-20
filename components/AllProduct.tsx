@@ -209,11 +209,11 @@ const AllProduct: React.FC<AllProductProps> = ({ showFilter = false }) => {
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <span className="text-sm font-bold text-gray-400">From</span>
                   <span className="text-xl font-black text-gray-900">
-                    ${product.price}
+                    ₹{product.price}
                   </span>
                   {product.oldPrice && (
                     <span className="text-sm text-gray-400 line-through">
-                      ${product.oldPrice}
+                      ₹{product.oldPrice}
                     </span>
                   )}
                 </div>

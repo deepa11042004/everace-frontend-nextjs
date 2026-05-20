@@ -69,7 +69,7 @@ const BannerSec = () => {
           {/* Price & Title */}
           <div className="flex items-center gap-2 mb-1">
             <span className="text-sm font-bold text-gray-400">From</span>
-            <span className="text-sm font-black text-gray-900">${product.price}</span>
+            <span className="text-sm font-black text-gray-900">₹{product.price}</span>
           </div>
 
           <h3 className="text-sm md:text-lg font-bold text-gray-800 mt-4 mb-2 h-10 line-clamp-2 px-2 leading-tight">

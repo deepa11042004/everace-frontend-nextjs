@@ -196,7 +196,7 @@ export default function AdminProducts() {
                     <span className="text-sm font-bold text-gray-500">{product.category}</span>
                   </td>
                   <td className="px-8 py-5">
-                    <span className="text-lg font-black text-gray-900">${product.price}</span>
+                    <span className="text-lg font-black text-gray-900">₹{product.price}</span>
                   </td>
                   <td className="px-8 py-5">
                     <span className="text-sm font-bold text-gray-600">{product.stock} units</span>

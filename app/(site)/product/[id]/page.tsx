@@ -211,14 +211,14 @@ export default function ProductDetailPage() {
             {/* Price */}
             <div className="flex items-center gap-4 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
               <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-black text-gray-900">${product.price}</span>
+                <span className="text-4xl font-black text-gray-900">₹{product.price}</span>
                 {product.oldPrice && (
-                  <span className="text-xl text-gray-400 line-through font-bold">${product.oldPrice}</span>
+                  <span className="text-xl text-gray-400 line-through font-bold">₹{product.oldPrice}</span>
                 )}
               </div>
               {product.oldPrice && (
                 <span className="bg-red-100 text-red-600 font-black text-xs px-3 py-1 rounded-full uppercase tracking-widest">
-                  Save ${(Number(product.oldPrice) - Number(product.price)).toFixed(2)}
+                  Save ₹{(Number(product.oldPrice) - Number(product.price)).toFixed(2)}
                 </span>
               )}
             </div>
@@ -262,7 +262,7 @@ export default function ProductDetailPage() {
                 className="flex-1 bg-[#facc15] text-black py-5 px-8 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-xl hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
               >
                 <ShoppingBasket size={20} />
-                Add to Cart • ${(Number(product.price) * quantity).toFixed(2)}
+                Add to Cart • ₹{(Number(product.price) * quantity).toFixed(2)}
               </button>
             </div>
 
@@ -413,8 +413,8 @@ export default function ProductDetailPage() {
                 {/* Price & Rating Row */}
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <span className="text-sm font-bold text-gray-400">From</span>
-                  <span className="text-xl font-black text-gray-900">${rec.price}</span>
-                  {rec.oldPrice && <span className="text-sm text-gray-400 line-through">${rec.oldPrice}</span>}
+                  <span className="text-xl font-black text-gray-900">₹{rec.price}</span>
+                  {rec.oldPrice && <span className="text-sm text-gray-400 line-through">₹{rec.oldPrice}</span>}
                 </div>
 
                 {/* Title */}

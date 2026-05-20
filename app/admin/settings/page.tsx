@@ -136,7 +136,7 @@ export default function AdminSettings() {
                   onChange={e => setCurrency(e.target.value)}
                   className="w-full bg-gray-50 rounded-2xl px-5 py-3.5 border border-gray-200 focus:ring-2 focus:ring-[#facc15] outline-none font-bold text-gray-900"
                 >
-                  <option value="USD">USD ($) - United States Dollar</option>
+                  <option value="USD">USD (₹) - United States Dollar</option>
                   <option value="EUR">EUR (€) - Euro</option>
                   <option value="GBP">GBP (£) - British Pound</option>
                   <option value="INR">INR (₹) - Indian Rupee</option>
@@ -179,7 +179,7 @@ export default function AdminSettings() {
             <h3 className="text-xl font-black uppercase text-gray-900 border-b border-gray-100 pb-4">Shipping Zones & Tax Rules</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-medium text-sm">
               <div>
-                <label className="block text-xs font-bold uppercase text-gray-500 mb-2">Default Flat Shipping Fee ($)</label>
+                <label className="block text-xs font-bold uppercase text-gray-500 mb-2">Default Flat Shipping Fee (₹)</label>
                 <input
                   type="text"
                   value={flatShipping}

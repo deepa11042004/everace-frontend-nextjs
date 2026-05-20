@@ -7,7 +7,6 @@ import {
   Save,
   Upload,
   Package,
-  DollarSign,
   Layers,
   Sparkles,
   ListFilter,
@@ -415,13 +414,13 @@ export default function AddProductPage() {
                 <div>
                   <label className="block text-xs font-black uppercase text-gray-700 mb-2">Price (₹)</label>
                   <div className="relative">
-                    <DollarSign size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                    {/* <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">₹</span> */}
                     <input
                       type="number"
                       step="0.01"
                       name="price"
                       required
-                      placeholder="0.00"
+                      placeholder="₹0.00"
                       value={formData.price}
                       onChange={handleChange}
                       className="w-full bg-gray-50 border-none rounded-2xl py-4 pl-11 pr-5 text-sm font-semibold text-gray-900 focus:ring-2 focus:ring-[#facc15] outline-none transition-all"
@@ -437,7 +436,7 @@ export default function AddProductPage() {
                       type="number"
                       step="0.01"
                       name="comparePrice"
-                      placeholder="0.00"
+                      placeholder="₹0.00"
                       value={formData.comparePrice}
                       onChange={handleChange}
                       className="w-full bg-gray-50 border-none rounded-2xl py-4 pl-11 pr-5 text-sm font-semibold text-gray-900 focus:ring-2 focus:ring-[#facc15] outline-none transition-all"

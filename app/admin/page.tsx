@@ -4,7 +4,7 @@ import { Package, ShoppingBag, Users, TrendingUp } from "lucide-react";
 
 export default function AdminDashboard() {
   const stats = [
-    { title: "Total Sales", value: "$24,500", icon: <TrendingUp size={24} />, trend: "+12%" },
+    { title: "Total Sales", value: "₹24,500", icon: <TrendingUp size={24} />, trend: "+12%" },
     { title: "Active Users", value: "1,250", icon: <Users size={24} />, trend: "+5%" },
     { title: "Total Products", value: "85", icon: <Package size={24} />, trend: "0%" },
     { title: "New Orders", value: "32", icon: <ShoppingBag size={24} />, trend: "+25%" },
@@ -50,10 +50,10 @@ export default function AdminDashboard() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {[
-                  { id: "#ORD-001", customer: "John Doe", date: "May 15, 2026", amount: "$120.00", status: "Completed" },
-                  { id: "#ORD-002", customer: "Jane Smith", date: "May 14, 2026", amount: "$45.50", status: "Processing" },
-                  { id: "#ORD-003", customer: "Michael Brown", date: "May 14, 2026", amount: "$89.99", status: "Pending" },
-                  { id: "#ORD-004", customer: "Sarah Wilson", date: "May 13, 2026", amount: "$210.00", status: "Completed" },
+                  { id: "#ORD-001", customer: "John Doe", date: "May 15, 2026", amount: "₹120.00", status: "Completed" },
+                  { id: "#ORD-002", customer: "Jane Smith", date: "May 14, 2026", amount: "₹45.50", status: "Processing" },
+                  { id: "#ORD-003", customer: "Michael Brown", date: "May 14, 2026", amount: "₹89.99", status: "Pending" },
+                  { id: "#ORD-004", customer: "Sarah Wilson", date: "May 13, 2026", amount: "₹210.00", status: "Completed" },
                 ].map((order, idx) => (
                   <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
                     <td className="py-4 font-medium">{order.id}</td>

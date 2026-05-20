@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Search, Plus, Tag, Trash2, Edit, CheckCircle, AlertCircle, Copy } from "lucide-react";
 
 const initialCoupons = [
-  { id: 1, code: "WELCOME10", discount: "10%", type: "Percentage", minSpend: "$50", usage: "45 / 100", expiry: "June 30, 2026", status: "Active" },
-  { id: 2, code: "FESTIVE20", discount: "$20", type: "Fixed Amount", minSpend: "$100", usage: "12 / 50", expiry: "May 25, 2026", status: "Active" },
-  { id: 3, code: "FREESHIP", discount: "Free Shipping", type: "Shipping", minSpend: "$75", usage: "88 / 200", expiry: "July 15, 2026", status: "Active" },
-  { id: 4, code: "VIPSPECIAL", discount: "25%", type: "Percentage", minSpend: "$150", usage: "100 / 100", expiry: "May 10, 2026", status: "Expired" },
-  { id: 5, code: "SUMMER5", discount: "$5", type: "Fixed Amount", minSpend: "$30", usage: "0 / 500", expiry: "Aug 31, 2026", status: "Disabled" },
+  { id: 1, code: "WELCOME10", discount: "10%", type: "Percentage", minSpend: "₹50", usage: "45 / 100", expiry: "June 30, 2026", status: "Active" },
+  { id: 2, code: "FESTIVE20", discount: "₹20", type: "Fixed Amount", minSpend: "₹100", usage: "12 / 50", expiry: "May 25, 2026", status: "Active" },
+  { id: 3, code: "FREESHIP", discount: "Free Shipping", type: "Shipping", minSpend: "₹75", usage: "88 / 200", expiry: "July 15, 2026", status: "Active" },
+  { id: 4, code: "VIPSPECIAL", discount: "25%", type: "Percentage", minSpend: "₹150", usage: "100 / 100", expiry: "May 10, 2026", status: "Expired" },
+  { id: 5, code: "SUMMER5", discount: "₹5", type: "Fixed Amount", minSpend: "₹30", usage: "0 / 500", expiry: "Aug 31, 2026", status: "Disabled" },
 ];
 
 export default function AdminCoupons() {
@@ -20,7 +20,7 @@ export default function AdminCoupons() {
   const [newCode, setNewCode] = useState("");
   const [newDiscount, setNewDiscount] = useState("");
   const [newType, setNewType] = useState("Percentage");
-  const [newMinSpend, setNewMinSpend] = useState("$50");
+  const [newMinSpend, setNewMinSpend] = useState("₹50");
   const [newExpiry, setNewExpiry] = useState("Dec 31, 2026");
 
   const filteredCoupons = coupons.filter(c => c.code.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -31,7 +31,7 @@ export default function AdminCoupons() {
     const newCoupon = {
       id: Date.now(),
       code: newCode.toUpperCase(),
-      discount: newType === "Percentage" ? `${newDiscount}%` : `$${newDiscount}`,
+      discount: newType === "Percentage" ? `${newDiscount}%` : `₹${newDiscount}`,
       type: newType,
       minSpend: newMinSpend,
       usage: "0 / 100",
@@ -203,7 +203,7 @@ export default function AdminCoupons() {
                     className="w-full bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 focus:ring-2 focus:ring-[#facc15] outline-none font-bold"
                   >
                     <option value="Percentage">Percentage (%)</option>
-                    <option value="Fixed Amount">Fixed Amount ($)</option>
+                    <option value="Fixed Amount">Fixed Amount (₹)</option>
                   </select>
                 </div>
                 <div>
@@ -219,12 +219,12 @@ export default function AdminCoupons() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Minimum Spend ($)</label>
+                <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Minimum Spend (₹)</label>
                 <input
                   type="text"
                   value={newMinSpend}
                   onChange={e => setNewMinSpend(e.target.value)}
-                  placeholder="$50"
+                  placeholder="₹50"
                   className="w-full bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 focus:ring-2 focus:ring-[#facc15] outline-none"
                 />
               </div>

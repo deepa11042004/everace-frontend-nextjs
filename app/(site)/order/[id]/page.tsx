@@ -256,13 +256,13 @@ export default function OrderDetailsPage() {
                         {item.name}
                       </h3>
                       <p className="text-xs font-bold text-gray-400 mt-1 tracking-wider uppercase">
-                        Qty: {item.quantity} × ${item.price.toFixed(2)}
+                        Qty: {item.quantity} × ₹{item.price.toFixed(2)}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
                     <span className="text-base font-black text-[#facc15]">
-                      ${(item.quantity * item.price).toFixed(2)}
+                      ₹{(item.quantity * item.price).toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export default function OrderDetailsPage() {
               <div className="space-y-2.5 text-sm font-medium text-gray-600">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-bold text-gray-900">${order.subtotal.toFixed(2)}</span>
+                  <span className="font-bold text-gray-900">₹{order.subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
@@ -313,11 +313,11 @@ export default function OrderDetailsPage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Estimated Tax</span>
-                  <span className="font-bold text-gray-900">${order.tax.toFixed(2)}</span>
+                  <span className="font-bold text-gray-900">₹{order.tax.toFixed(2)}</span>
                 </div>
                 <div className="border-t border-gray-100 pt-4 flex justify-between items-center text-lg font-black text-gray-900">
                   <span>Grand Total</span>
-                  <span className="text-2xl text-[#facc15]">${order.total.toFixed(2)}</span>
+                  <span className="text-2xl text-[#facc15]">₹{order.total.toFixed(2)}</span>
                 </div>
               </div>
             </div>

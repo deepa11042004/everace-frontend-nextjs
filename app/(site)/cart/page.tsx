@@ -148,7 +148,7 @@ const CartPage = () => {
                                   />
                                 </div>
                                 <p className="font-bold text-xs sm:text-sm text-[#facc15] mt-1">
-                                  ${item.price.toFixed(2)}
+                                  ₹{item.price.toFixed(2)}
                                 </p>
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mt-0.5">
                                   Click to view details
@@ -201,7 +201,7 @@ const CartPage = () => {
 
                               <div className="text-right min-w-[80px]">
                                 <p className="font-black text-gray-900 text-lg">
-                                  ${(item.price * item.quantity).toFixed(2)}
+                                  ₹{(item.price * item.quantity).toFixed(2)}
                                 </p>
                               </div>
 
@@ -286,7 +286,7 @@ const CartPage = () => {
                   <div className="space-y-4 font-medium text-sm text-gray-600">
                     <div className="flex justify-between">
                       <span>Subtotal ({itemCount} items)</span>
-                      <span className="font-bold text-gray-900">${cartTotal.toFixed(2)}</span>
+                      <span className="font-bold text-gray-900">₹{cartTotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Estimated Shipping</span>
@@ -294,12 +294,12 @@ const CartPage = () => {
                     </div>
                     <div className="flex justify-between">
                       <span>Estimated Tax</span>
-                      <span className="font-bold text-gray-900">$0.00</span>
+                      <span className="font-bold text-gray-900">₹0.00</span>
                     </div>
 
                     <div className="border-t border-gray-100 pt-4 flex justify-between items-center text-lg text-gray-900 font-black">
                       <span>Total Amount</span>
-                      <span className="text-2xl text-[#facc15]">${cartTotal.toFixed(2)}</span>
+                      <span className="text-2xl text-[#facc15]">₹{cartTotal.toFixed(2)}</span>
                     </div>
                   </div>
 

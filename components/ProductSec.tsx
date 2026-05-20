@@ -260,11 +260,11 @@ const ProductSec = () => {
                           From
                         </span>
                         <span className="text-lg sm:text-xl font-black text-gray-900">
-                          ${product.price}
+                          ₹{product.price}
                         </span>
                         {product.oldPrice && (
                           <span className="text-xs sm:text-sm text-gray-400 line-through font-bold">
-                            ${product.oldPrice}
+                            ₹{product.oldPrice}
                           </span>
                         )}
                       </div>
